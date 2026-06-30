@@ -1,0 +1,129 @@
+.admin-panel {
+  padding: 2rem;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.admin-panel__header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-panel__count {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.admin-panel__table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.admin-panel__row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+}
+
+.admin-panel__row.is-self {
+  border-color: #4f8df0;
+  background-color: #f5f9ff;
+}
+
+.admin-panel__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #eee;
+  flex-shrink: 0;
+}
+
+.admin-panel__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.admin-panel__name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-panel__email {
+  font-size: 0.8rem;
+  color: #777;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-panel__role {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.admin-panel__role--admin {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.admin-panel__role--user {
+  background-color: #eaf1fd;
+  color: #4f8df0;
+}
+
+.admin-panel__actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.admin-panel__btn {
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  border: 1px solid;
+}
+
+.admin-panel__btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.admin-panel__btn--role {
+  background: #fff;
+  color: #1d1d1f;
+  border-color: #ccc;
+}
+
+.admin-panel__btn--role:not(:disabled):hover {
+  background: #f0f0f0;
+}
+
+.admin-panel__btn--delete {
+  background: #fff;
+  color: #e63946;
+  border-color: #e63946;
+}
+
+.admin-panel__btn--delete:not(:disabled):hover {
+  background: #fdecec;
+}

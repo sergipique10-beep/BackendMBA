@@ -33,6 +33,29 @@ export async function removeFavoritePost(userId, postId, token) {
   return data;
 }
 
+export async function getAllUsers(token) {
+  const res = await fetch(`${API_URL}/users`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || "Error al obtener usuarios");
+  return data;
+}
+
+export async function changeUserRole(userId, role, token) {
+  const res = await fetch(`${API_URL}/users/${userId}/role`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ role }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message || "Error al cambiar rol");
+  return data;
+}
+
 export async function deleteAccount(userId, token) {
   const res = await fetch(`${API_URL}/users/${userId}`, {
     method: "DELETE",

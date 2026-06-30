@@ -42,3 +42,8 @@
 .header__logout-btn {
   border-color: #e63946;
 }
+
+.header__admin-btn {
+  border-color: #f4a261;
+  color: #f4a261;
+}

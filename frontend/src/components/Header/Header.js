@@ -20,6 +20,14 @@ export function createHeader({ user, onNavigate, onLogout }) {
   nav.appendChild(postsBtn);
 
   if (user) {
+    if (user.role === "admin") {
+      const adminBtn = document.createElement("button");
+      adminBtn.className = "header__nav-btn header__admin-btn";
+      adminBtn.textContent = "⚙ Admin";
+      adminBtn.addEventListener("click", () => onNavigate("admin"));
+      nav.appendChild(adminBtn);
+    }
+
     const profileBtn = document.createElement("button");
     profileBtn.className = "header__nav-btn header__profile-btn";
     profileBtn.innerHTML = `${userIcon()}<span>${user.name}</span>`;

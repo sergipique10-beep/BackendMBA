@@ -3,8 +3,9 @@ import { createHeader } from "./components/Header/Header.js";
 import { createAuthForm } from "./components/AuthForm/AuthForm.js";
 import { createPostList } from "./components/PostList/PostList.js";
 import { createProfile } from "./components/Profile/Profile.js";
+import { createAdminPanel } from "./components/AdminPanel/AdminPanel.js";
 import { loginUser, registerUser } from "./api/auth.api.js";
-import { getProfile, addFavoritePost, removeFavoritePost, deleteAccount } from "./api/users.api.js";
+import { getProfile, addFavoritePost, removeFavoritePost, deleteAccount, getAllUsers, changeUserRole } from "./api/users.api.js";
 import { getPosts } from "./api/posts.api.js";
 import { getToken, setToken, clearToken } from "./utils/storage.js";
 
@@ -12,7 +13,8 @@ const state = {
   token: getToken(),
   user: null,
   posts: [],
-  view: "posts", // 'posts' | 'login' | 'profile'
+  users: [],
+  view: "posts", // 'posts' | 'login' | 'profile' | 'admin'
   category: "",
 };
 
@@ -40,7 +42,18 @@ async function loadPosts() {
   }
 }
 
-function navigate(view) {
+async function loadUsers() {
+  try {
+    state.users = await getAllUsers(state.token);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+async function navigate(view) {
+  if (view === "admin" && state.user?.role === "admin") {
+    await loadUsers();
+  }
   state.view = view;
   render();
 }
@@ -65,6 +78,7 @@ function handleLogout() {
   clearToken();
   state.token = null;
   state.user = null;
+  state.users = [];
   navigate("posts");
 }
 
@@ -90,6 +104,18 @@ async function handleFilterCategory(category) {
   render();
 }
 
+async function handleChangeRole(userId, newRole) {
+  await changeUserRole(userId, newRole, state.token);
+  await loadUsers();
+  render();
+}
+
+async function handleAdminDeleteUser(userId) {
+  await deleteAccount(userId, state.token);
+  await loadUsers();
+  render();
+}
+
 function getFavoriteIds() {
   return state.user?.posts?.map((post) => post._id) || [];
 }
@@ -111,6 +137,13 @@ function render() {
       user: state.user,
       onToggleFavorite: handleToggleFavorite,
       onDeleteAccount: handleDeleteAccount,
+    });
+  } else if (state.view === "admin" && state.user?.role === "admin") {
+    main = createAdminPanel({
+      users: state.users,
+      currentUserId: state.user._id,
+      onChangeRole: handleChangeRole,
+      onDeleteUser: handleAdminDeleteUser,
     });
   } else {
     main = createPostList({
