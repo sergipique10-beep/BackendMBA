@@ -1,0 +1,51 @@
+.post-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.post-card__category {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #4f8df0;
+  background-color: #eaf1fd;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}
+
+.post-card__title {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.post-card__description {
+  color: #555;
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.post-card__author {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.post-card__fav-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.post-card__fav-btn.is-active svg {
+  transform: scale(1.1);
+}

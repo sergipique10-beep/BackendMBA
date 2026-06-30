@@ -1,0 +1,68 @@
+.profile {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.profile__header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.profile__avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #eee;
+}
+
+.profile__info h2 {
+  margin: 0 0 0.25rem;
+}
+
+.profile__email {
+  color: #666;
+  margin: 0 0 0.4rem;
+}
+
+.profile__role {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background-color: #eaf1fd;
+  color: #4f8df0;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}
+
+.profile__fav-title {
+  margin-bottom: 1rem;
+}
+
+.profile__favorites {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.profile__empty {
+  color: #888;
+}
+
+.profile__delete-btn {
+  padding: 0.6rem 1.2rem;
+  background-color: #fff;
+  color: #e63946;
+  border: 1px solid #e63946;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.profile__delete-btn:hover {
+  background-color: #fdecec;
+}

@@ -1,0 +1,44 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #1d1d1f;
+  color: #fff;
+}
+
+.header__logo {
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.header__nav {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.header__nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.header__nav-btn:hover {
+  background-color: #2c2c2e;
+}
+
+.header__profile-btn {
+  border-color: #4f8df0;
+}
+
+.header__logout-btn {
+  border-color: #e63946;
+}
