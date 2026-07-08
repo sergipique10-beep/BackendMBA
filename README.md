@@ -154,4 +154,4 @@ Base URL: `http://localhost:3000/api`
 
 ## Usuario administrador
 
-_TODO: completar con las credenciales del usuario admin de prueba antes de entregar el proyecto._
+
