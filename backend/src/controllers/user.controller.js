@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const Post = require("../models/Post");
 const cloudinary = require("../config/cloudinary");
 
 const generateToken = (id) =>
@@ -230,21 +231,22 @@ const addFavoritePost = async (req, res) => {
       return res.status(403).json({ message: "No tienes permiso para modificar esta lista" });
     }
 
-    const user = await User.findById(userId);
-    if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
+    const postExists = await Post.exists({ _id: postId });
+    if (!postExists) return res.status(404).json({ message: "Post no encontrado" });
 
-    // Evitar duplicados: comprobamos si el post ya está en el array
-    const alreadyAdded = user.posts.some((p) => p.toString() === postId);
-    if (alreadyAdded) {
-      return res.status(400).json({ message: "Este post ya está en tus favoritos" });
-    }
-
-    // $addToSet garantiza que no se duplique a nivel de base de datos
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
+    // Un único update: la condición "posts no contiene postId" evita duplicados
+    // y nos dice si el usuario existe, sin necesidad de una consulta previa.
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: userId, posts: { $ne: postId } },
       { $addToSet: { posts: postId } },
       { new: true }
     ).populate("posts", "title description category");
+
+    if (!updatedUser) {
+      const userExists = await User.exists({ _id: userId });
+      if (!userExists) return res.status(404).json({ message: "Usuario no encontrado" });
+      return res.status(400).json({ message: "Este post ya está en tus favoritos" });
+    }
 
     res.json({ message: "Post añadido a favoritos", user: updatedUser });
   } catch (error) {
